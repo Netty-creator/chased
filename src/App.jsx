@@ -19,7 +19,6 @@ function deriveStatus(inv) {
   return daysUntil(inv.due_date) < 0 ? "overdue" : "pending";
 }
 
-// ---------- Supabase helpers (plain fetch, no SDK needed) ----------
 async function supabaseSignUp(email, password) {
   const res = await fetch(`${SUPABASE_URL}/auth/v1/signup`, {
     method: "POST",
@@ -61,7 +60,6 @@ async function createInvoice(accessToken, invoice) {
   return res.json();
 }
 
-// ---------- UI pieces ----------
 function Receipt({ invoice, onCopy, copied }) {
   const status = STATUS_STYLES[deriveStatus(invoice)];
   const StatusIcon = status.icon;
@@ -110,7 +108,7 @@ function Receipt({ invoice, onCopy, copied }) {
 }
 
 function AuthScreen({ onAuthed }) {
-  const [mode, setMode] = useState("signin"); // signin | signup
+  const [mode, setMode] = useState("signin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -318,4 +316,4 @@ export default function InvoiceApp() {
 }
 
 const labelStyle = { display: "block", fontSize: 12, fontWeight: 600, color: "#8A8F9E", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 6, marginTop: 14 };
-const inputStyle = { width: "100%", boxSizing: "border-box", padding: "11px 12px", borderRadius: 7, border: "1px solid #D8DAE1", fontSize: 14, color: "#1B2340", outline: "none", fontFamily: "inherit" };
+const inputStyle = { width: "100%", boxSizing: "border-box", padding: "11px 12px", borderRadius: 7, border: "1px solid #D8DAE1", fontSize: 14, color: "#1B2340", outline: "none", fontFamily: "inherit", backgroundColor: "#fff", colorScheme: "light" };
